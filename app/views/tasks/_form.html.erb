@@ -1,29 +1,19 @@
-<%= form_for(@task) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-      <ul>
-      <% @task.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<div class='form-container'>
+  <%= form_for(@task) do |f| -%>
+    <table cellpadding='0' cellspacing='0'>
+      <tr>
+        <td colspan='3' class="title"><%= ['edit','update'].include?(params[:action]) ? 'Edit Task' : 'Add new task' %></td>
+      </tr>  
+      <% if notice %>
+        <tr>
+          <td class="notice" colspan='3'><%= notice %></td>
+        </tr>
+      <% end %>  
+      <tr>
+        <td valign='top'><%= f.text_field :title %></td>
+        <td><%= f.submit 'Go', {:class => 'button'} -%></td>
+        <td><%= f.submit 'Cancel', {:type => :button, :class => 'button'} -%></td>
+      </tr>  
+    </table>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br />
-    <%= f.check_box :active %>
-  </div>
-  <div class="field">
-    <%= f.label :deleted_at %><br />
-    <%= f.datetime_select :deleted_at %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Go' %>
-  </div>
-<% end %>
+</div>

@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
-  ACTIVE  = 'active'
-  PENDING = 'pending'
+  COMPLETED = 'completed'
+  PENDING   = 'pending'
 
   attr_accessible :title
 
@@ -9,12 +9,17 @@ class Task < ActiveRecord::Base
   before_save :set_default_status
 
   scope :pending, where("status = ?", PENDING)
-  scope :completed, where("status = ?", ACTIVE)
+  scope :completed, where("status = ?", COMPLETED)
 
+  def update_status(new_status)
+    return false  unless [COMPLETED, PENDING].include?(new_status)
+    self.status = new_status
+    self.save
+  end
   
   private 
   def set_default_status
-    self.status = PENDING
+    status = PENDING unless status
   end
 
 end

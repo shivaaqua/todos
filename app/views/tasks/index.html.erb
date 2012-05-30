@@ -1,54 +1,40 @@
-
-<h1><%= ['edit','update'].include?(params[:action]) ? 'Edit Task' : 'Add new task' %></h1>
-<p id="notice"><%= notice %></p>
-<div>
-  <%= form_for(@task) do |f| %>
-    <div>
-      <div><%= f.text_field :title %> <%= f.submit 'Go' %> </div>
-  <% end %>
-</div>
-
-<h1>Pending tasks</h1>
-<table>
+<%= render 'form' %>
+<table width='90%' cellspacing='0' cellpadding='5'>
   <tr>
-    <th>Title</th>
-    <th>Completed</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </tr>
+    <td valign='top' width='50%' id="pending_tasks_list">
+      <h2>Pending tasks</h2>
+      <table width='95%'  cellspacing='2' cellpadding='4' class="listings">
+      <% @pending_tasks.each do |task| %>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <td width='80%'><%= task.title %></td>
+          <td><%= link_to image_tag("icon-completed.png", 
+                    {:title => 'Mark as completed'}), edit_task_path(task, :status => 'completed') %>
+          </td>
+          <td><%= link_to image_tag("icon_edit_small.png", {:title => 'Edit'}), edit_task_path(task) %></td>
+          <td><%= link_to image_tag("delete.png", {:title => 'Remove task'}), 
+                                    task, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+     </table>
+    </td>
 
-<% @pending_tasks.each do |task| %>
-  <tr>
-    <td><%= task.title %></td>
-    <td>Pending</td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
+    <td width='50%' valign='top' id="completed_tasks_list">
+      <h2>Completed tasks</h2>
+      <table width='95%' cellspacing='2' cellpadding='4' class="listings">
+      <% @completed_tasks.each do |task| %>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <td width='80%'><%= task.title %></td>
+          <td><%= link_to image_tag("icon-completed.png", 
+                  {:title => 'Mark as pending'}), edit_task_path(task, :status => 'pending') %>
+          </td>
+        </tr>
+      <% end %>
+     </table>
+    </td>
+
   </tr>
-<% end %>
 </table>
 
-<br />
-<h1>Completed tasks</h1>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Active</th>
-    <th>Deleted at</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @completed_tasks.each do |task| %>
-  <tr>
-    <td><%= task.title %></td>
-    <td>Completed</td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
 
 

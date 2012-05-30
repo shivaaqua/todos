@@ -1,0 +1,83 @@
+$black: black
+$white: white
+
+$gray: lighten($black, 20%)
+$darkgray: lighten($black, 5%)
+$silver: lighten($black, 30%)
+
+
+@font-face
+  font-family: "UbuntuRegular"
+  src: url(/Ubuntu-R.ttf) 
+
+
+@mixin container($width, $height, $padding, $bgcolor, $border, $textcolor)
+  width: $width
+  height: $height
+  padding: $padding
+  background-color: $bgcolor  
+  border: $border
+  color: $textcolor
+
+.remove-border
+  border: 0px
+
+.remove-padding
+  padding: 0px
+
+
+body 
+  padding: 0
+  margin: 0
+  background-color: $white
+  font-family: UbuntuRegular, arial
+  font-size: 12px
+
+form
+  input[type='text']
+    border: $gray 1px solid
+    height: 20px
+
+  input[type='submit']
+    height: 23px
+
+  input[type='button']
+    height: 23px
+
+
+.header
+  @include container(auto, 30px, 5px, $black, $silver 1px solid, $white)  
+  font-size: 16px
+  
+.content
+  @include container(auto, auto, 5px 10px, $white, 0, $black)  
+  min-height: 100px
+  font-size: 12px
+
+.form-container
+  @include container(auto, auto, 0 0 15px 0, darken($white, 5%), darken($white, 4%), $darkgray)  
+  font-size: 12px
+  input[type='text']
+    width: 350px
+
+.title
+  font-size: 14px
+  font-weight: bold
+  padding: 2px
+
+.notice
+  color: green
+
+.even 
+  background-color: darken($white, 5%)
+  color: darken($white, 85%)
+  
+.odd
+  background-color: $white
+  color: darken($white, 85%)
+
+.listings 
+  tr  
+    td:hover
+      cursor: pointer
+     

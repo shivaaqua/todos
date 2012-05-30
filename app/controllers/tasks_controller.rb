@@ -1,8 +1,10 @@
 class TasksController < ApplicationController
+
   def tasks
     @pending_tasks   = Task.pending
     @completed_tasks = Task.completed
   end
+
   # GET /tasks
   # GET /tasks.json
   def index
@@ -12,17 +14,6 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tasks }
-    end
-  end
-
-  # GET /tasks/1
-  # GET /tasks/1.json
-  def show
-    @task = Task.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @task }
     end
   end
 
@@ -41,6 +32,11 @@ class TasksController < ApplicationController
   def edit
     tasks
     @task = Task.find(params[:id])
+    status = params[:status]
+    if ['pending','completed'].include?(status)  
+      @task.update_status(status)
+      redirect_to tasks_url, notice: 'Task was successfully updated.' and return
+    end
     render 'index' and return
   end
 

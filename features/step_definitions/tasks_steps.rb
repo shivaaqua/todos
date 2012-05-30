@@ -2,6 +2,8 @@ require Rails.root.to_s +  '/lib/sahi'
 
 browser = Sahi::Browser.new("chrome")
 browser.open
+home_page = "http://localhost:3000"
+
 
 at_exit do
   browser.close
@@ -12,15 +14,15 @@ Given /^I am a normal user$/ do
 end
 
 When /^I visit the todos application for very first time$/ do
-  browser.navigate_to("http://localhost:3000")
+  browser.navigate_to(home_page)
 end
 
 Then /^I should not see any pending tasks$/ do
-  raise 'error' if browser.cell("Pending").exists?  
+  browser.cell("Pending").exists?.should be_false
 end
 
 Then /^I should not see any completed tasks$/ do
-  raise 'error' if browser.cell("Completed").exists?
+  browser.cell("Completed").exists?.should be_false
 end
 
 Given /^I have no task pending or completed$/ do
@@ -28,7 +30,7 @@ Given /^I have no task pending or completed$/ do
 end
 
 Given /^I am on todo page as a normal user$/ do
-  browser.navigate_to("http://localhost:3000")
+  browser.navigate_to(home_page)
 end
 
 When /^I add new task$/ do
@@ -45,6 +47,20 @@ When /^I edit a todo item under any category$/ do
   browser.link("Edit").click
   task = browser.textbox("task[title]").value
   @task = Task.find_by_title(task)
+end
+
+When /^I add multiple tasks$/ do
+  (1..10).each do |i|
+    browser.textbox("task[title]").value = "My favorite task #{i}"
+    browser.submit("Go").click
+  end
+end
+
+Then /^I should see all the tasks under "(.*?)" category$/ do |category|
+  category = category.gsub!(" tasks", '')
+  (1..10).each do |i|
+    browser.cell("My favorite task #{i}").exists?.should be_true 
+  end
 end
 
 Then /^I should be able to update only its title$/ do
@@ -66,7 +82,8 @@ Then /^I should see task with updated title under "(.*?)" category$/ do |arg1|
 end
 
 Then /^I should see task with updated title under respective category$/ do
-  Task.find_by_title('My updated task').status.should eql 'pending'
+  browser.cell("My updated task").text.should eql 'My updated task' 
+  Task.find_by_title("My updated task").status.should eql @task.status 
 end
 
 

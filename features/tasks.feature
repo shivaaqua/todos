@@ -26,6 +26,11 @@ When I edit a todo item under any category
 And  I update the task title
 Then I should see task with updated title under respective category
 
+Scenario: List all todo in same page
+Given I am on todo page as a normal user
+When I add multiple tasks
+Then I should see all the tasks under "Pending tasks" category
+
 Scenario: Mark a task as completed
 Given I am on todo page as a normal user
 When I select a todo item under "Pending Tasks" list
