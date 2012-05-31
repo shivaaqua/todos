@@ -3,12 +3,12 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $("#pending_tasks_list table tr:gt(0)").draggable
+  $("#pending_tasks_list table tr").draggable
     delay: 200
     revert: "invalid"
     helper: "clone"
 
-  $("#completed_tasks_list table tr:gt(0)").draggable
+  $("#completed_tasks_list table tr").draggable
     delay: 200
     revert: "invalid"
     helper: "clone"

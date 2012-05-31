@@ -31,6 +31,7 @@ group :development, :test do
   gem 'faker'
   gem 'capybara'
   gem "guid", "~> 0.1.1"
+  gem 'thin'
 end
 
 group :test do

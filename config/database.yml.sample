@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: username
+  password: password
+
+development:
+  database: todos_development
+  <<: *default
+
+test: &test
+  database: todos_test
+  <<: *default
+
+cucumber:
+  <<: *test

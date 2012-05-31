@@ -3,51 +3,100 @@ In order to manage my daily tasks
 As a normal user
 I need a simple task management interface
 
-Scenario: Very first visit
-Given I am a normal user
-When I visit the todos application for very first time
-Then I should not see any pending tasks
-And I should not see any completed tasks
+  Scenario: Very first visit
+    Given I am on todo page as a normal user
+    When I visit the todos application for very first time
+    Then I should not see any pending tasks
+    And I should not see any completed tasks
 
-Scenario: Add new todo
-Given I am on todo page as a normal user
-And I have no task pending or completed
-When I add new task 
-Then I should see the task under "Pending tasks" category
+  Scenario: Add new tasks
+    Given I am on todo page as a normal user
+    And I have no pending tasks
+    When I add following tasks 
+      | title                |
+      | Analysis             |
+      | Design               |
+      | Development          |
+      | Testing              |
+    Then I should see the following tasks under "Pending tasks" category
+      | title                |
+      | Analysis             |
+      | Design               |
+      | Development          |
+      | Testing              |
 
-Scenario: Only title of a task is editable
-Given I am on todo page as a normal user
-When I edit a todo item under any category
-Then I should be able to update only its title
+  Scenario: Update a task
+      Given I am on todo page as a normal user
+      And I have following "pending" tasks
+        | title                |
+        | Analysis             |
+        | Design               |
+        | Development          |
+        | Testing              |
+      When I update task title "Analysis" to "Requirement Analysis"
+      Then I should see "Task was successfully updated." message
+      And I should see the following tasks under "Pending tasks" category
+        | title                |    
+        | Requirement Analysis |
+        | Design               |
+        | Development          |
+        | Testing              |
+        
+  Scenario: Mark a task as completed
+      Given I am on todo page as a normal user
+      And I have following "pending" tasks
+        | title                |    
+        | Analysis             |
+        | Design               |
+        | Development          |
+        | Testing              |
+      When I click on "Mark as completed" icon for "Analysis" task
+      Then I should see the following tasks under "Pending tasks" category
+        | title                |    
+        | Design               |
+        | Development          |
+        | Testing              |
+      And I should see the following tasks under "Completed tasks" category
+        | title                |    
+        | Analysis             |
 
-Scenario: Update a todo
-Given I am on todo page as a normal user
-When I edit a todo item under any category
-And  I update the task title
-Then I should see task with updated title under respective category
 
-Scenario: List all todo in same page
-Given I am on todo page as a normal user
-When I add multiple tasks
-Then I should see all the tasks under "Pending tasks" category
-
-Scenario: Mark a task as completed
-Given I am on todo page as a normal user
-When I select a todo item under "Pending Tasks" list
-And I click on "mark as completed " icon 
-Then I should see the task moved under "Completed tasks" category
-
-Scenario: Mark a task as pending
-Given I am on todo page as a normal user
-When I select a todo item under "Completed Tasks" list
-And I click on "mark as pending" icon 
-Then I should see the task moved under "Pending tasks" category
-
-Scenario: Delete a task
-Given I am on todo page as a normal user
-When I select a todo item
-And I click on "delete" icon 
-Then I should see "Task removed successfully" message
-And the task should not be in the task list
+  Scenario: Mark a task as pending
+    Given I am on todo page as a normal user
+    And I have following "pending" tasks
+      | title                |
+      | Development          |
+      | Testing              |
+    And I have following "completed" tasks
+      | title                |
+      | Analysis             |
+      | Design               |      
+    When I click on "Mark as pending" icon for "Analysis" task
+    Then I should see the following tasks under "Pending tasks" category
+      | title                |
+      | Analysis             |
+      | Development          |
+      | Testing              |
+    And I should see the following tasks under "Completed tasks" category
+      | title                |    
+      | Design               |
+      
+      
+      
+  Scenario: Delete a task
+    Given I am on todo page as a normal user
+    And I have following "pending" tasks
+      | title                |    
+      | Analysis             |
+      | Design               |
+      | Development          |
+      | Testing              |
+    When I click on "Delete" icon for "Analysis" task
+    Then I should see "Task removed successfully" message
+    And I should see the following tasks under "Pending tasks" category
+      | title                |
+      | Design               |
+      | Development          |
+      | Testing              |
 
 

@@ -6,7 +6,7 @@ class Task < ActiveRecord::Base
 
   validates :title, :presence => true
 
-  before_save :set_default_status
+  before_create :set_default_status
 
   scope :pending, where("status = ?", PENDING)
   scope :completed, where("status = ?", COMPLETED)
@@ -16,10 +16,10 @@ class Task < ActiveRecord::Base
     self.status = new_status
     self.save
   end
-  
+
   private 
   def set_default_status
-    status = PENDING unless status
+    self.status = PENDING unless status
   end
 
 end
