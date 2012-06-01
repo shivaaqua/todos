@@ -1,0 +1,25 @@
+$black: black
+$white: white
+
+$gray: lighten($black, 20%)
+$darkgray: lighten($black, 5%)
+$silver: lighten($black, 30%)
+
+
+@mixin formelement($width, $height, $padding, $border)
+  width: $width
+  height: $height
+  padding: $padding
+  border: $border
+
+.simple_form
+  div.form-inputs
+    label
+      width: 100px
+    input[type='email']
+      @include formelement(250px, 20px, 2px, $gray 1px solid)
+    
+    input[type='password']
+      @include formelement(250px, 20px, 2px, $gray 1px solid)
+
+  

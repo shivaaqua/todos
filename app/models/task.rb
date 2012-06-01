@@ -14,7 +14,15 @@ class Task < ActiveRecord::Base
   def update_status(new_status)
     return false  unless [COMPLETED, PENDING].include?(new_status)
     self.status = new_status
-    self.save
+    self.save!
+  end
+  
+  def pending?
+    status == PENDING
+  end
+  
+  def completed?
+    status == COMPLETED
   end
 
   private 

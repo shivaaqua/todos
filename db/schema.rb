@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525150043) do
+ActiveRecord::Schema.define(:version => 20120601110016) do
 
   create_table "tasks", :force => true do |t|
     t.string   "title",      :limit => 100,                   :null => false
@@ -25,5 +25,13 @@ ActiveRecord::Schema.define(:version => 20120525150043) do
   add_index "tasks", ["created_at"], :name => "index_tasks_on_created_at"
   add_index "tasks", ["status"], :name => "index_tasks_on_status"
   add_index "tasks", ["title"], :name => "index_tasks_on_title"
+
+  create_table "users", :force => true do |t|
+    t.string   "email",           :limit => 150, :null => false
+    t.string   "password_digest",                :null => false
+    t.string   "mobile",          :limit => 15,  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
 end

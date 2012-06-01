@@ -24,7 +24,7 @@ describe TasksController do
   # Task. As you add validations to Task, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:title => 'Documentation'}
   end
   
   # This should return the minimal set of values that should be in the session
@@ -35,18 +35,10 @@ describe TasksController do
   end
 
   describe "GET index" do
-    it "assigns all tasks as @tasks" do
+    it "assigns all pending tasks as @pending_tasks" do
       task = Task.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:tasks).should eq([task])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested task as @task" do
-      task = Task.create! valid_attributes
-      get :show, {:id => task.to_param}, valid_session
-      assigns(:task).should eq(task)
+      assigns(:pending_tasks).should eq([task])
     end
   end
 
@@ -63,6 +55,22 @@ describe TasksController do
       get :edit, {:id => task.to_param}, valid_session
       assigns(:task).should eq(task)
     end
+    it "mark task as completed" do
+      task = Task.create! valid_attributes
+      get :edit, {:id => task.to_param, :status => 'completed'}, valid_session
+      assigns(:task).status.should eql 'completed'
+      response.should redirect_to(tasks_path)
+    end
+    it "mark task as pending" do
+      task = Task.create! valid_attributes
+      task.status = 'completed'
+      task.save!
+      
+      get :edit, {:id => task.to_param, :status => 'pending'}, valid_session
+      assigns(:task).status.should eql 'pending'
+      response.should redirect_to(tasks_path)
+    end
+
   end
 
   describe "POST create" do
@@ -81,7 +89,7 @@ describe TasksController do
 
       it "redirects to the created task" do
         post :create, {:task => valid_attributes}, valid_session
-        response.should redirect_to(Task.last)
+        response.should redirect_to(tasks_path)
       end
     end
 
@@ -97,7 +105,7 @@ describe TasksController do
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
         post :create, {:task => {}}, valid_session
-        response.should render_template("new")
+        response.should render_template("index")
       end
     end
   end
@@ -123,7 +131,7 @@ describe TasksController do
       it "redirects to the task" do
         task = Task.create! valid_attributes
         put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
-        response.should redirect_to(task)
+        response.should redirect_to(tasks_path)
       end
     end
 
@@ -141,7 +149,7 @@ describe TasksController do
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
         put :update, {:id => task.to_param, :task => {}}, valid_session
-        response.should render_template("edit")
+        response.should render_template("index")
       end
     end
   end

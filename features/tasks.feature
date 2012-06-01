@@ -92,8 +92,7 @@ I need a simple task management interface
       | Development          |
       | Testing              |
     When I click on "Delete" icon for "Analysis" task
-    Then I should see "Task removed successfully" message
-    And I should see the following tasks under "Pending tasks" category
+    Then I should see the following tasks under "Pending tasks" category
       | title                |
       | Design               |
       | Development          |
