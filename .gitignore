@@ -11,7 +11,7 @@
 /db/*.sqlite3
 /coverage/*
 /config/database.yml
-
+/config/api_keys.yml
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
