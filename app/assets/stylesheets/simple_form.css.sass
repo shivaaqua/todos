@@ -1,0 +1,86 @@
+@import 'variables'
+
+.simple_form
+
+
+  div.input
+    padding: 3px
+
+  div.alert,.alert-error  
+    color: $red
+    padding-bottom: 20px
+
+  label
+    float: left
+    width: 100px
+    text-align: right
+    margin: 2px 10px
+
+  .error
+    clear: left
+    color: black
+    display: block
+    margin-left: 120px
+    font-size: 12px
+
+  .hint
+    clear: left
+    margin-left: 120px
+    font-size: 12px
+    color: #555
+    display: block
+    font-style: italic
+
+div.form-inputs
+  div
+    label.control-label
+      width: 135px
+    .required sup
+      color: $orange
+      
+    span.error
+      display: inline
+      margin-left: 15px
+      font-size: 12px  
+      color: $red
+
+div.form-actions
+  padding: 2px 0px
+  margin-left: 40px
+  
+
+div.boolean, .simple_form input[type='submit']
+  margin-left: 120px
+
+div.boolean label, label.collection_radio_buttons
+  float: none
+  margin: 0
+
+label.collection_radio_buttons
+  margin-right: 10px
+  vertical-align: -2px
+  margin-left: 2px
+
+.field_with_errors
+  color: $gray
+
+input.string
+  width: 250px
+  border: $gray 1px solid
+  height: 20px
+  padding: 2px
+
+  
+input.radio
+  margin-right: 5px
+  vertical-align: -3px
+
+input.check_boxes
+  margin-left: 3px
+  vertical-align: -3px
+
+label.collection_check_boxes
+  float: none
+  margin: 0
+  vertical-align: -2px
+  margin-left: 2px

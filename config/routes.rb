@@ -1,7 +1,17 @@
 Todos::Application.routes.draw do
+  
+  get  "logout" => "sessions#destroy", :as => "logout"
+  get  "login" => "sessions#new", :as => "login"
+  post "login" => "sessions#create", :as => "login"
+  get "signup" => "users#new", :as => "signup"
+  
+  match '/auth/:provider/callback', to: 'sessions#create'
+  match '/auth/failure' => 'sessions#new'
+  
   resources :users
-
   resources :tasks
+  resources :sessions
+  
   root :to => 'tasks#index'
 
   # The priority is based upon order of creation:

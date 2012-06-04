@@ -7,6 +7,13 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
+gem 'omniauth'
+#gem 'omniauth-internal'
+gem "omniauth-github"
+gem "omniauth-facebook"
+gem "omniauth-twitter"
+gem 'omniauth-google-oauth2'
+gem 'omniauth-openid'
 #gem 'client_side_validations'
 #gem 'client_side_validations-simple_form'
 
