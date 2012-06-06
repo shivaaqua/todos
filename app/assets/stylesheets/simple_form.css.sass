@@ -2,9 +2,13 @@
 
 .simple_form
 
-
   div.input
     padding: 3px
+    input[type='password']
+      border: $mediumgray 1px solid
+
+
+
 
   div.alert,.alert-error  
     color: $red
@@ -32,6 +36,21 @@
     font-style: italic
 
 div.form-inputs
+  div.input
+    label
+      color: lighten($gray, 12%)
+      
+    input.password
+      border: $mediumgray 1px solid
+      padding: 4px
+      width: 300px
+
+    input.string
+      width: 300px
+      border: $mediumgray 1px solid
+      height: 20px
+      padding: 4px
+
   div
     label.control-label
       width: 135px
@@ -64,11 +83,7 @@ label.collection_radio_buttons
 .field_with_errors
   color: $gray
 
-input.string
-  width: 250px
-  border: $gray 1px solid
-  height: 20px
-  padding: 2px
+
 
   
 input.radio

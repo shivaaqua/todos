@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :services
+  has_many :authorizations
   
   attr_accessible :email, :mobile, :password, :password_confirmation
   
@@ -13,5 +13,9 @@ class User < ActiveRecord::Base
     find_by_email(login).try(:authenticate, password)
   end
   
+  def associate_account(auth_id=nil) 
+    authorize = Authorization.find(auth_id)
+    authorize.update_attributes(:user_id => self.id)  if auth_id
+  end
   
 end

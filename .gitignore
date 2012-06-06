@@ -12,6 +12,7 @@
 /coverage/*
 /config/database.yml
 /config/api_keys.yml
+config/api_keys.yml
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp

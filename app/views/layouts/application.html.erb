@@ -8,16 +8,32 @@
 </head>
 <body>
 
-<div>
-  <div class="header"><%= link_to "My Today's tasks", root_url %> </div>
-  <div class="content">
-    <%= yield %> 
-  </div>
-  <!-- footer starts here -->
-  <div class="footer">
-  </div>
-  <!-- footer ends here -->
-</div>
+  <!-- container starts here -->
+  <div class='container'>
+
+    <!-- header starts here -->  
+    <div class='layout-header'>
+      <span><%= image_tag('task.png', {:class => 'logo'}) %></span>
+      <span class='caption'>My todays task</span>   
+      <span class='menu'><%= link_to 'login', '/login' %></span>
+      <span class='menu'><%= link_to 'signup', '/signup' %></span>
+    </div> 
+   <!-- header ends here -->
+
+    <!-- content section starts here -->
+    <div class='layout-content'>
+      <div class='content'><%= yield %></div>
+    </div>   
+    <!-- content section ends here -->
+
+    <!-- footer starts here -->
+    <div class='layout-footer'>
+      <div></div>
+    </div> 
+   <!-- footer ends here -->
+    
+   </div>
+   <!-- container ends here -->
 
 </body>
 </html>

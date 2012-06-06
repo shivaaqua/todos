@@ -14,6 +14,8 @@ gem "omniauth-facebook"
 gem "omniauth-twitter"
 gem 'omniauth-google-oauth2'
 gem 'omniauth-openid'
+gem 'unicorn'
+
 #gem 'client_side_validations'
 #gem 'client_side_validations-simple_form'
 
