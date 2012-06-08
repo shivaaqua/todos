@@ -4,11 +4,6 @@
       <tr>
         <td colspan='3' class="title"><%= ['edit','update'].include?(params[:action]) ? 'Edit Task' : 'Add new task' %></td>
       </tr>  
-      <% if notice %>
-        <tr>
-          <td class="notice" colspan='3'><%= notice %></td>
-        </tr>
-      <% end %>  
       <tr>
         <td valign='top'><%= f.text_field :title %></td>
         <td><%= f.submit 'Go', {:class => 'button'} -%></td>

@@ -4,10 +4,26 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate_user!, :except => :destroy
 
   def new
+    render 'new' and return unless auth_hash
+    
+    record = Authorization.find_or_create_from_hash(auth_hash)
+    if record.user_id
+      session[:user_id] = record.user_id
+      redirect_to tasks_url
+    else
+      session[:auth_id] = record.id
+      session[:provider]= auth_hash[:provider]
+      @user             = User.new(:email => record.email)  
+      flash.now[:error] = "Your 'My todays task' account is not linked with #{auth_hash[:provider]}.
+                            <br />Kindly login in to link it now.
+                            If you are a new member signup to continue..".html_safe
+      render 'new' and return 
+    end  
   end
   
   def failure
-    raise 'failure'
+    flash.now.alert = 'Unable to connect. Try again later !!!'
+    render 'new', :alert => 'Unable to connect. Try again later !!!'
   end
 =begin  
   
@@ -19,42 +35,33 @@ class SessionsController < ApplicationController
   end
 =end  
   def create
-    authenticate_user and return unless auth_hash
-    auth_account = Authorization.find_from_hash(auth_hash)    
+    user = User.authenticate(params[:email], params[:password])
     
-    if auth_account.try(:user_id)
-      session[:user_id] = auth_account.user_id  
-      redirect_to '/tasks' and return
-    else    
-      auth_account      = Authorization.create_from_hash(auth_hash)
-      session[:auth_id] = auth_account.id
-      @user             = User.new(:email => auth_account.email)  
-      render 'sessions/new' and return
+    unless user
+      flash.now[:alert] = "Invalid email or password"
+      render "new"
+    end    
+    
+    session[:user_id]  = user.id
+    if session[:auth_id]
+      rec = Authorization.find(session[:auth_id]) 
+      rec.associate_user(user.id) 
+      flash[:notice]     = "Your account is successfully linked with #{session[:provider]}."
+      session[:auth_id]  = nil
+      session[:provider] = nil
     end
+    redirect_to '/tasks' and return
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to '/login', :notice => "Logged out!"
+    redirect_to '/login', :notice => "You are successfuly logged out!"
   end
   
   private
   
   def auth_hash
     request.env['omniauth.auth']
+    
   end
-  
-  def authenticate_user
-    user = User.authenticate(params[:email], params[:password])
-    if user
-      session[:user_id] = user.id
-      user.associate_account(session[:auth_id]) if session[:auth_id]
-      session[:auth_id] = nil 
-      redirect_to root_url
-    else
-      flash.now.alert = "Invalid email or password"
-      render "new"
-    end
-  end
-  
 end

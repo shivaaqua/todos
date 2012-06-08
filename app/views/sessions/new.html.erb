@@ -1,14 +1,4 @@
-<div class='title-container'>Login</div>
-
-<%= form_tag sessions_path do  %>
-<div class="form-container"" >
-  <div class='error'><%= flash[:alert] %></div>
- 
-  <%= text_field_tag 'email', params[:email], {:autocomplete => "off"} %>
-  <%= password_field_tag 'password', nil, {:autocomplete => "off"} %>
-  <%= submit_tag 'Login' %>
-</div>
-  <div>
+  <!--div>
     you can use following accounts to sign in
     <div>
       <table cellspacing='2' cellpadding='2'>
@@ -24,5 +14,54 @@
         <div>
 
     </div>  
-  </div>   
-<% end %>
+  </div -->   
+
+
+<h1 class='form-title'> Signin </h1>
+ <div class='simple_form signin-form'>
+  <!-- signin form starts here -->
+  <div style='float:left'>
+    <%= form_tag sessions_path do  %>
+    
+      <%= render 'shared/alert' %>
+        
+      <div class="form-container">
+        <div><label>Your Email</label></div>
+        <div>
+          <%= text_field_tag 'email', params[:email], {:autocomplete => "off"} %>
+        </div>
+        <div><label>Your Password</label></div>
+        <div>
+          <span><%= password_field_tag 'password', nil, {:autocomplete => "off"} %></span>
+          <span><%= link_to 'Forgot your password?', '#' %></span>  
+        </div>
+        <div class='form-actions'>  
+          <%= button_tag 'Login', {:type=>'submit', :class => 'btn signin-btn'} %>
+        </div>   
+      </div>
+    <% end %>
+    
+  </div>
+  <!-- signin form ends here -->
+  <div style='float:right' class='sigin-form'> 
+
+    <div>
+      <h3>You can use following accounts to sign in</h3>
+      <div>
+        <table cellspacing='2' cellpadding='2'>
+        <tr>  
+        <td><%= link_to image_tag("myopenid.png"), "/auth/myopenid" %></td>
+        <td><%= link_to image_tag("github.png"), "/auth/github" %></td>
+        <td><%= link_to image_tag("facebook.png"), "/auth/facebook" %></td>
+        <td><%= link_to image_tag("twitter.png"), "/auth/twitter" %></td>
+        <td><%= link_to image_tag("google.png"), "/auth/google_oauth2" %></td>
+        </tr>
+        </table>  
+      </div>  
+    </div>   
+      
+    <div><h3>New member?</h3></div>
+    <div><%= button_tag 'Join now', {:class => 'btn register-btn'} %></div>
+  </div>
+ </div> 
+

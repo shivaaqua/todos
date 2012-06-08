@@ -29,17 +29,30 @@ body
   font-family: UbuntuRegular, arial
   font-size: 12px
   overflow-x: hidden
+a
+  color: $gray
+  text-decoration: none
+
+a:hover
+  color: $orange  
+
+h3
+  color: lighten($black, 35%)
 
 div.form-container
+  label
+    color: lighten($gray, 12%)
   input[type='text']
-    border: $mediumgray 1px solid
     height: 20px
-    width: 225px
+    width: 300px
+    padding: 3px
+    border: $mediumgray 1px solid
     
   input[type='password']
-    border: $mediumgray 1px solid
     height: 20px
-    width: 225px
+    width: 300px
+    padding: 3px
+    border: $mediumgray 1px solid
 
   input[type='submit']
     height: 23px
@@ -89,7 +102,6 @@ div.form-container
     height: auto
 
 .layout-footer
-
   width: 100% 
   background-color: #F5F5F5
   height: 120px
@@ -97,17 +109,14 @@ div.form-container
   position: absolute
   bottom: 0px
 
-.register-btn
+.register-btn, .signin-btn
   width: 135px
   padding: 5px
   font-weight: bold
   color: $gray
+  cursor: pointer
 
 
-
-.form-container
-  @include container(auto, auto, 0 0 15px 0, darken($white, 5%), darken($white, 4%), $darkgray)  
-  font-size: 12px
 
 
 .title-container

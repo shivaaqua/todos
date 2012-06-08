@@ -46,9 +46,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        @user.associate_account(session[:auth_id])
-        session[:auth_id] = nil
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        if session[:auth_id]
+          @user.associate_account(session[:auth_id])
+          session[:auth_id] = nil
+          session[:provider] = nil
+        end  
+        format.html { redirect_to tasks_path, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }

@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
+  $("div.signin-form button.register-btn").click ->
+    location.href = "/signup"
+    
+  $("div#alert-message a").click ->
+    $("div#alert-message").fadeOut 300

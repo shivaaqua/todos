@@ -8,8 +8,8 @@ Todos::Application.routes.draw do
   get  "signup"   => "users#new",        :as => "signup"
   get  "profile"  => "users#show",       :as => "profile"
   
-  match '/auth/:provider/callback', to: 'sessions#create'
-  match '/auth/failure' => 'session#failure'
+  match '/auth/:provider/callback', to: 'sessions#new'
+  match '/auth/failure', to:  'sessions#failure'
   
 
   resources :sessions
