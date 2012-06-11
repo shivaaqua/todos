@@ -1,5 +1,10 @@
 Todos::Application.routes.draw do
-  
+  resources :sessions
+  resources :users
+  resources :tasks
+  resources :reset_passwords
+
+
   get "welcome/index"
 
   get  "logout"   => "sessions#destroy", :as => "logout"
@@ -12,9 +17,6 @@ Todos::Application.routes.draw do
   match '/auth/failure', to:  'sessions#failure'
   
 
-  resources :sessions
-  resources :users
-  resources :tasks
   
   root :to => 'welcome#index'
 

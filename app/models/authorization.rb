@@ -8,7 +8,7 @@ class Authorization < ActiveRecord::Base
   end  
   
   def self.find_or_create_from_hash(hash, user=nil)
-    record       = find_or_initialize_by_provider_and_uid(hash[:provider], hash[:uid])
+    record       = find_or_initialize_by_provider_and_uid(hash[:provider], hash[:uid].to_s)
     record.email = hash[:info]['email']
     record.save unless record.persisted?
     record

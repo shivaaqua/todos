@@ -8,9 +8,6 @@ class Task < ActiveRecord::Base
 
   before_create :set_default_status
 
-  scope :pending, where("status = ?", PENDING)
-  scope :completed, where("status = ?", COMPLETED)
-
   def update_status(new_status)
     return false  unless [COMPLETED, PENDING].include?(new_status)
     self.status = new_status

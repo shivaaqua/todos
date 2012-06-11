@@ -15,8 +15,15 @@
     <div class='layout-header'>
       <span><%= image_tag('task.png', {:class => 'logo'}) %></span>
       <span class='caption'>My todays task</span>   
-      <span class='menu'><%= link_to 'login', '/login' %></span>
-      <span class='menu'><%= link_to 'signup', '/signup' %></span>
+      <% unless current_user %>
+        <span class='menu'><%= link_to 'blog', '/blog' %></span>
+        <span class='menu'><%= link_to 'login', '/login' %></span>
+        <span class='menu'><%= link_to 'signup', '/signup' %></span>
+     <% else %>   
+      <span class='menu'><%= link_to 'Logout', '/logout' %></span>
+      <span class='menu'><%= link_to 'MyProfile', '/profile' %></span>
+      <span class='menu'><%= link_to 'Dashboard', '/tasks' %></span>
+     <% end %> 
     </div> 
    <!-- header ends here -->
 

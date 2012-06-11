@@ -1,0 +1,19 @@
+<h1 class='form-title'> Reset my password </h1>
+ <div class='simple_form signin-form'>
+ <%= render 'shared/alert' %>
+  <div style='float:left'>
+    <%= form_tag reset_passwords_path do  %>
+      <div class="form-container">
+        <div><label>Your Email</label></div>
+        <div>
+          <%= text_field_tag 'email', params[:email], {:autocomplete => "off"} %>
+        </div>
+        <div class='form-actions'>  
+          <%= button_tag 'Reset', {:type=>'submit', :class => 'btn signin-btn'} %>
+        </div>   
+      </div>
+    <% end %>
+    
+  </div>
+ </div>  
+

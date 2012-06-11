@@ -2,5 +2,5 @@ $ ->
   $("div.signin-form button.register-btn").click ->
     location.href = "/signup"
     
-  $("div#alert-message a").click ->
-    $("div#alert-message").fadeOut 300
+  $("div#alert-msg a").click ->
+    $("div#alert-msg").fadeOut 300

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120605164400) do
+ActiveRecord::Schema.define(:version => 20120611140416) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -43,18 +43,22 @@ ActiveRecord::Schema.define(:version => 20120605164400) do
     t.datetime "deleted_at"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
+    t.integer  "user_id",                                     :null => false
   end
 
   add_index "tasks", ["created_at"], :name => "index_tasks_on_created_at"
   add_index "tasks", ["status"], :name => "index_tasks_on_status"
   add_index "tasks", ["title"], :name => "index_tasks_on_title"
+  add_index "tasks", ["user_id"], :name => "index_tasks_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",           :limit => 150, :null => false
-    t.string   "password_digest",                :null => false
-    t.string   "mobile",          :limit => 15,  :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.string   "email",                  :limit => 150, :null => false
+    t.string   "password_digest",                       :null => false
+    t.string   "mobile",                 :limit => 15,  :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end

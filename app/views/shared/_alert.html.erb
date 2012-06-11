@@ -1,7 +1,7 @@
 <% flash.each do |msg|
   msg_type = msg.first 
 %>
-  <div id="alert-message" class="<%= msg_type %>">
+  <div id="alert-msg" class="<%= msg_type %>-msg">
     <%= msg.last  -%>
     <a href='#' class='close-btn'>X</a>
   </div>

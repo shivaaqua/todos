@@ -39,10 +39,11 @@ class SessionsController < ApplicationController
     
     unless user
       flash.now[:alert] = "Invalid email or password"
-      render "new"
+      render "new" and return
     end    
     
     session[:user_id]  = user.id
+    
     if session[:auth_id]
       rec = Authorization.find(session[:auth_id]) 
       rec.associate_user(user.id) 

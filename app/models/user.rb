@@ -1,12 +1,16 @@
 class User < ActiveRecord::Base
+  require "task_scope"
+ 
   has_secure_password
+  
   has_many :authorizations
+  has_many :tasks, :extend => TaskScope 
   
   attr_accessible :email, :mobile, :password, :password_confirmation
   
   validates :email,    :presence => true, :uniqueness => {:case_sensitive => false}
   validates :password, :presence => {:on => :create }, :confirmation => true
-  validates :password_confirmation, :presence => true
+  validates :password_confirmation, :presence => {:if => :password_present?} 
   validates :mobile,   :presence => true, :length => {:maximum => 15 }
   
   def self.authenticate(login, password)
@@ -18,4 +22,19 @@ class User < ActiveRecord::Base
     authorize.update_attributes(:user_id => self.id)  if auth_id
   end
   
+  def send_new_password
+    self.password_reset_token   = SecureRandom.urlsafe_base64
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+  
+  def password_reset_expired?
+    password_reset_sent_at < 2.hours.ago
+  end
+  
+  private
+  def password_present?
+    password.present?
+  end
 end

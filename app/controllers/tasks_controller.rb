@@ -1,14 +1,8 @@
 class TasksController < ApplicationController
-
-  def tasks
-    @pending_tasks   = Task.pending
-    @completed_tasks = Task.completed
-  end
-
   # GET /tasks
   # GET /tasks.json
   def index
-    tasks
+    all_tasks
     @task            = Task.new
 
     respond_to do |format|
@@ -20,7 +14,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   # GET /tasks/new.json
   def new
-    @task = Task.new
+    @task = tasks.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -30,8 +24,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    tasks
-    @task = Task.find(params[:id])
+    all_tasks
+    @task = tasks.find(params[:id])
     status = params[:status]
     if ['pending','completed'].include?(status)  
       @task.update_status(status)
@@ -43,14 +37,14 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(params[:task])
+    @task = tasks.new(params[:task])
 
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_url, notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
-        tasks
+        all_tasks
         format.html { render action: "index" }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
@@ -60,7 +54,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1
   # PUT /tasks/1.json
   def update
-    @task = Task.find(params[:id])
+    @task = tasks.find(params[:id])
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
@@ -77,7 +71,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task = Task.find(params[:id])
+    @task = tasks.find(params[:id])
     @task.destroy
 
     respond_to do |format|
@@ -85,4 +79,15 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  def tasks
+    @current_user.tasks
+  end
+  
+  def all_tasks
+    @pending_tasks   = tasks.pending
+    @completed_tasks = tasks.completed
+  end
+
 end
