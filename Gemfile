@@ -15,6 +15,7 @@ gem "omniauth-twitter"
 gem 'omniauth-google-oauth2'
 gem 'omniauth-openid'
 gem 'unicorn'
+gem 'activemerchant', :require => 'active_merchant'
 
 #gem 'client_side_validations'
 #gem 'client_side_validations-simple_form'

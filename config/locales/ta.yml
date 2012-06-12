@@ -1,0 +1,22 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+ta:
+  english: 'English'
+  tamil: 'தமிழ்'
+  hindi: 'हिंदी'
+  arabic: 'العربية'
+  menu:
+    dashboard: 'டாஷ்போர்டு'
+    profile: 'சுயவிவரம்'  
+    logout: 'வெளியேறு'
+
+  tasks:
+    index:
+      pending_title: 'நிலுவையிலுள்ள பணிகள்' 
+      completed_title: 'முடிக்கப்பட்ட பணிகள்' 
+    form:      
+      add_new_task_title: 'புதிய பணியை சேர்க்க'
+      add_button: 'சேர்'
+      cancel_button: 'ரத்துசெய்'
+      
+      

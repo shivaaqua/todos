@@ -1,0 +1,23 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+ar:
+  english: 'English'
+  tamil: 'தமிழ்'
+  hindi: 'हिंदी'
+  arabic: 'العربية'
+  menu:
+    dashboard: 'لوحة القيادة'
+    profile:  'الملف الشخصي'
+    logout: 'خروج'
+
+
+  tasks:
+    index:
+      pending_title: 'في انتظار المهام' 
+      completed_title: 'إنجاز المهام' 
+    form:
+      add_new_task_title: 'إضافة مهمة جديدة'
+      add_button: 'إضافة'
+      cancel_button: 'إلغاء'
+      
+      

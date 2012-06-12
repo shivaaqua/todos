@@ -2,4 +2,19 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  english: 'English'
+  tamil: 'தமிழ்'
+  hindi: 'हिंदी'
+  arabic: 'العربية'
+  menu:
+    dashboard: 'Dashboard'
+    profile: 'My Profile'  
+  tasks:
+    index:
+      pending_title: 'Pending tasks' 
+      completed_title: 'Completed tasks' 
+    form:
+      add_new_task_title: 'Add new task'
+      add_button: 'Add'
+      cancel_button: 'Cancel'
+      

@@ -1,13 +1,14 @@
+
 <div class='form-container'>
   <%= form_for(@task) do |f| -%>
     <table cellpadding='0' cellspacing='0' border='0'>
       <tr>
-        <td colspan='3' class="title"><%= ['edit','update'].include?(params[:action]) ? 'Edit Task' : 'Add new task' %></td>
+        <td colspan='3' class="title"><%= ['edit','update'].include?(params[:action]) ? 'Edit Task' : t('.add_new_task_title') %></td>
       </tr>  
       <tr>
         <td valign='top'><%= f.text_field :title %></td>
-        <td><%= f.submit (['edit','update'].include?(params[:action]) ? 'Update' : 'Add'), {:class => 'button'} -%></td>
-        <td><%= f.submit 'Cancel', {:class => 'button cancel-btn'} -%></td>
+        <td><%= f.submit (['edit','update'].include?(params[:action]) ? 'Update' : t('.add_button')), {:class => 'button'} -%></td>
+        <td><%= f.submit t('.cancel_button'), {:class => 'button cancel-btn'} -%></td>
       </tr>  
     </table>
   <% end %>

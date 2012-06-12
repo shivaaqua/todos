@@ -1,11 +1,10 @@
 <%= render 'shared/alert' %>
-
-<%= render 'form' %> 
+<%= render 'form', :add_new_task_title => t('.add_new_task_title')  %> 
 <table width='90%' cellspacing='0' cellpadding='5'>
   <tr>
     <td valign='top' width='50%' id="pending_tasks_list">
     
-      <h2>Pending tasks</h2>
+      <h2><%= t ".pending_title" %> </h2>
       <table width='95%' cellspacing='2' cellpadding='4' class="listings" id="pending_tasks_table">
         <% @pending_tasks.each do |task| %>
           <tr class="<%= cycle('even', 'odd') %>">
@@ -28,7 +27,7 @@
 
     <td width='50%' valign='top' id="completed_tasks_list">
     
-      <h2>Completed tasks</h2>
+      <h2><%= t ".completed_title" %></h2>
       <table width='95%' cellspacing='2' cellpadding='4' class="listings" id="completed_tasks_table">
         <% @completed_tasks.each do |task| %>
           <tr class="<%= cycle('even', 'odd') %>">

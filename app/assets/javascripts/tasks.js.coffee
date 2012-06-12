@@ -20,3 +20,6 @@ $ ->
   $("#completed_tasks_list").droppable drop: (event, ui) ->
     c = $(ui.draggable).find("td:eq(1) a").attr("href")
     location.href = c
+    
+  
+
