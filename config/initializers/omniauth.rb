@@ -1,6 +1,11 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   require 'openid/store/filesystem' 
   require 'api_keys'
+
+  #configure do |config|
+  #  config.path_prefix = "/#{I18n.locale}/auth" 
+  #end
+
   #provider :developer unless Rails.env.production?
   
   provider :github, APIConfig.github["access_key"], APIConfig.github["secret_key"]

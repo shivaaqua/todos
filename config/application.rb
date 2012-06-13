@@ -21,8 +21,8 @@ module Todos
     #config.middleware.use OmniAuth::Builder do
     #  provider :internal, :model => ::User
     #end
-
-
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = true
     config.force_ssl = true
   
     # Settings in config/environments/* take precedence over those specified here.

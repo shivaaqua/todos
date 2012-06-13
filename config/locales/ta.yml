@@ -9,6 +9,9 @@ ta:
     dashboard: 'டாஷ்போர்டு'
     profile: 'சுயவிவரம்'  
     logout: 'வெளியேறு'
+  sessions:
+    new:
+      signin_title: 'உள்நுழைவு'    
 
   tasks:
     index:

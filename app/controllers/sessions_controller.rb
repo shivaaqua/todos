@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     render 'new' and return unless auth_hash
     
     record = Authorization.find_or_create_from_hash(auth_hash)
+
     if record.user_id
       session[:user_id] = record.user_id
       redirect_to tasks_url
@@ -63,6 +64,5 @@ class SessionsController < ApplicationController
   
   def auth_hash
     request.env['omniauth.auth']
-    
   end
 end

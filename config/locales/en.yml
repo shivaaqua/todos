@@ -9,6 +9,10 @@ en:
   menu:
     dashboard: 'Dashboard'
     profile: 'My Profile'  
+    
+  sessions:
+    new:
+      signin_title: 'Sign In'    
   tasks:
     index:
       pending_title: 'Pending tasks' 

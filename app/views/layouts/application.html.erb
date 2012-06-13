@@ -26,6 +26,7 @@
       <span class='menu'><%= link_to t('menu.dashboard'), 'tasks' %></span>
      <% end %> 
       <span class='menu'>
+        <%= params[:locale].inspect %>
         <%= select_tag 'locale', options_for_select(languages,params[:locale]) %>
       </span>
     </div> 

@@ -16,7 +16,8 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-openid'
 gem 'unicorn'
 gem 'activemerchant', :require => 'active_merchant'
-
+#gem 'globalize3'
+     
 #gem 'client_side_validations'
 #gem 'client_side_validations-simple_form'
 
@@ -30,7 +31,7 @@ group :assets do
 end
 
 group :development do
-  gem 'annotate'
+  gem 'annotate', ">=2.5.0.pre1"
   gem 'capistrano'
   gem 'rails_best_practices'
   gem 'railroad'        
@@ -43,7 +44,7 @@ group :development, :test do
   gem "rspec-rails", "~> 2.0"
   gem 'faker'
   gem 'capybara'
-  gem "guid", "~> 0.1.1"
+  gem "guid", "~> 0.1.1"   #for sahi
   gem 'thin'
 end
 

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  active     :boolean          default(TRUE), not null
+#  created_at :datetime         not null
+#  deleted_at :datetime
+#  id         :integer          not null, primary key
+#  status     :string(10)       not null
+#  title      :string(100)      not null
+#  updated_at :datetime         not null
+#  user_id    :integer          not null
+#
+
 require 'spec_helper'
 
 describe Task do
