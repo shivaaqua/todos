@@ -9,7 +9,7 @@
 #  password_digest        :string(255)      not null
 #  password_reset_sent_at :datetime
 #  password_reset_token   :string(255)
-#  updated_at             :datetime         not null
+#  updated_at             :datetime         not nulll
 #
 
 class User < ActiveRecord::Base
@@ -37,10 +37,14 @@ class User < ActiveRecord::Base
   end
   
   def send_new_password
-    self.password_reset_token   = SecureRandom.urlsafe_base64
-    self.password_reset_sent_at = Time.zone.now
-    save!
-    UserMailer.password_reset(self).deliver
+    begin
+      self.password_reset_token   = SecureRandom.urlsafe_base64
+      self.password_reset_sent_at = Time.zone.now
+      save!
+      c = UserMailer.password_reset(self).deliver
+    rescue => e
+      false
+    end  
   end
   
   def password_reset_expired?

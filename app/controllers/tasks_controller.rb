@@ -1,4 +1,8 @@
 class TasksController < ApplicationController
+  helper_method :cache_key
+
+#caches_action :index, :layout => false, :cache_path => proc{|x| tasks_url(I18n.locale, session[:user_id]) }
+
   # GET /tasks
   # GET /tasks.json
   def index
@@ -29,6 +33,7 @@ class TasksController < ApplicationController
     status = params[:status]
     if ['pending','completed'].include?(status)  
       @task.update_status(status)
+      expire_task_cache
       redirect_to tasks_url, notice: 'Task was successfully updated.' and return
     end
     render 'index' and return
@@ -41,6 +46,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
+        expire_task_cache
         format.html { redirect_to tasks_url, notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
@@ -58,6 +64,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
+        expire_task_cache
         format.html { redirect_to tasks_url, notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
@@ -71,6 +78,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
+    expire_task_cache
     @task = tasks.find(params[:id])
     @task.destroy
 
@@ -89,5 +97,15 @@ class TasksController < ApplicationController
     @pending_tasks   = tasks.pending
     @completed_tasks = tasks.completed
   end
+  
+  def expire_task_cache
+    expire_fragment(cache_key)
+    #expire_action tasks_url(I18n.locale, session[:user_id]) 
+  end
+  
+  def cache_key
+    "#{current_user.id}_#{I18n.locale}_tasks"
+  end
+  
 
 end

@@ -1,48 +1,50 @@
 <%= render 'shared/alert' %>
-<%= render 'form', :add_new_task_title => t('.add_new_task_title')  %> 
-<table width='90%' cellspacing='0' cellpadding='5'>
-  <tr>
-    <td valign='top' width='50%' id="pending_tasks_list">
-    
-      <h2><%= t ".pending_title" %> </h2>
-      <table width='95%' cellspacing='2' cellpadding='4' class="listings" id="pending_tasks_table">
-        <% @pending_tasks.each do |task| %>
-          <tr class="<%= cycle('even', 'odd') %>">
-            <td width='80%'><%= task.title %></td>
-            <td><%= link_to image_tag("icon-completed.png", {:title => 'Mark as completed', 
-                                                             :name => "mark_as_completed"}), 
-                            edit_task_path(task, :status => 'completed') %>
-            </td>
-            <td><%= link_to image_tag("icon_edit_small.png", {:title => 'Edit', :name => 'Edit'}),
-                             edit_task_path(task) %>
-             </td>
-            <td><%= link_to image_tag("delete.png", {:title => 'Delete'}), 
-                            task, confirm: 'Are you sure?', method: :delete %>
+
+<% cache(cache_key) do %>
+  <%= render 'form', :add_new_task_title => t('.add_new_task_title')  %> 
+  <table width='90%' cellspacing='0' cellpadding='5'>
+    <tr>
+      <td valign='top' width='50%' id="pending_tasks_list">
+      
+        <h2><%= t ".pending_title" %> </h2>
+        <table width='95%' cellspacing='2' cellpadding='4' class="listings" id="pending_tasks_table">
+          <% @pending_tasks.each do |task| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+              <td width='80%'><%= task.title %></td>
+              <td><%= link_to image_tag("icon-completed.png", {:title => 'Mark as completed', 
+                                                               :name => "mark_as_completed"}), 
+                              edit_task_path(task, :status => 'completed') %>
+              </td>
+              <td><%= link_to image_tag("icon_edit_small.png", {:title => 'Edit', :name => 'Edit'}),
+                               edit_task_path(task) %>
+               </td>
+              <td><%= link_to image_tag("delete.png", {:title => 'Delete'}), 
+                              task, confirm: 'Are you sure?', method: :delete %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        
+      </td>
+
+      <td width='50%' valign='top' id="completed_tasks_list">
+      
+        <h2><%= t ".completed_title" %></h2>
+        <table width='95%' cellspacing='2' cellpadding='4' class="listings" id="completed_tasks_table">
+          <% @completed_tasks.each do |task| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+              <td width='80%'><%= task.title %></td>
+              <td><%= link_to image_tag("icon-pending.png", {:title => 'Mark as pending'}),
+                              edit_task_path(task, :status => 'pending') %>
             </td>
           </tr>
         <% end %>
-      </table>
-      
-    </td>
+        </table>
+        
+      </td>
+    </tr>
+  </table>
 
-    <td width='50%' valign='top' id="completed_tasks_list">
-    
-      <h2><%= t ".completed_title" %></h2>
-      <table width='95%' cellspacing='2' cellpadding='4' class="listings" id="completed_tasks_table">
-        <% @completed_tasks.each do |task| %>
-          <tr class="<%= cycle('even', 'odd') %>">
-            <td width='80%'><%= task.title %></td>
-            <td><%= link_to image_tag("icon-pending.png", {:title => 'Mark as pending'}),
-                            edit_task_path(task, :status => 'pending') %>
-          </td>
-        </tr>
-      <% end %>
-      </table>
-      
-    </td>
-  </tr>
-</table>
-
-
+<% end %>
 
 

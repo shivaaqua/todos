@@ -2,6 +2,7 @@ Todos::Application.routes.draw do
 
   match '/auth/:provider/callback', to: "sessions#new" 
   match '/auth/failure', to:  'sessions#failure'
+  resources :reset_passwords
 
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
     get "welcome/index"
@@ -13,9 +14,9 @@ Todos::Application.routes.draw do
     
     
     resources :sessions
-    resources :users
+    resources :users 
     resources :tasks
-    resources :reset_passwords
+
 
     root :to => 'welcome#index'
   end
